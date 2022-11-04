@@ -1,7 +1,5 @@
 <div id="top"></div>
 
-
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -11,27 +9,22 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/aplokwn/ABS2022_June">
-    <img src="https://raw.githubusercontent.com/aplokwn/ABS2022_June/d4c67361f55bb45681a1b21b1a7a7484ad84be26/readmeImage/logo-01.svg" alt="Logo" width="200" height=auto>
+
   </a>
 
-<h3 align="center">Alberta Bike Swap</h3>
+<h3 align="center">Cash Register</h3>
 
   <p align="center">
     <br />
-    <a href="https://sampleabs.herokuapp.com"><strong>Live Demo @ heroku »</strong></a><br/>
-    <a href="https://github.com/aplokwn/ABS2022_June"><strong>Explore the docs »</strong></a>
+    <a href="https://playcode.io/1002604"><strong>Live Demo @ playcode »</strong></a><br/>
     <br />
     <br />
     <br />
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -41,115 +34,160 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
-        <li><a href="#built-with">Support Library</a></li>
       </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#Dependencies">Dependencies</a></li>
-        <li><a href="#installation">Installation</a></li>
+       <li><a href="#challenge-point">Challenge Point</a></li>
+      </ul>
+        <li><a href="#code-explaintion">Code Explaintion</a></li>
       </ul>
     </li>
     </ol>
 </details>
-
-
+<br/>
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
-
- ![Screen Shot-Landing Page](https://raw.githubusercontent.com/aplokwn/ABS2022_June/master/readmeImage/ABS_pic.png)
- [![Screen Shot-Bike Livefeed]](https://raw.githubusercontent.com/aplokwn/ABS2022_June/master/readmeImage/ABS_pic02.png)
- [![Screen Shot-Bike Location Page]](https://raw.githubusercontent.com/aplokwn/ABS2022_June/master/readmeImage/ABS_pic03.png)
-
-
-This is a Java with mavel web application which act as a infornation display for the Alberta Bike Swap Event, and also act as a bike inventory display platform during the event. 
-
-Bike Live Feed Page (bike inventory) is designd to access bike inventory through JSON API. 
+This is a freecodecamp Javascript project just for practise.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### Built With
 
-* [Java](https://www.java.com/en/)
-* [Javascript](https://www.javascript.com/)
-* [Bootstrap](https://getbootstrap.com)
-  
-
-### Library Support
-* [JSTL](https://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/overview-summary.html)
-* [Gson](https://github.com/google/gson/blob/master/UserGuide.md)
-* [jsPDF](https://github.com/parallax/jsPDF)
-
-
+- [Javascript](https://www.javascript.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
-### Prerequisites
+### Challenge Point
 
-1. The default server of this application Tomcat. POM need to be update if using server other than Tomcat.
+<p>
+1. Decimal to whole number. It is easy to make mistake if we don't beware of the calulation result in js.
+2. Making the correct codition to filter the cash in hand and changes comperison, then push the correct result to the change result list.
+</p>
 
-2. Project JDK version: 1.7
+### Code Explaintion
 
-3. Maven version: 3.1
-   
-4. Best competibilty IDE: NetBean 12. Using IntelliJ may require to update project's Maven to 3.3 or higher, and update project's JDK to 1.8.
+<br/>
+<p>
+Setup variables and constances that we will use afterwards.
+</p>
 
+```javascript
+let change = []
+let status = ''
+let result = { status: null, change: [] }
 
+const cashUnit = [
+  ['PENNY', 0.01],
+  ['NICKEL', 0.05],
+  ['DIME', 0.1],
+  ['QUARTER', 0.25],
+  ['ONE', 1],
+  ['FIVE', 5],
+  ['TEN', 10],
+  ['TWENTY', 20],
+  ['ONE HUNDRED', 100],
+]
 
-### Dependencies
-```Maven POM
-<dependencies>
- <dependency>
-  <groupId>javax</groupId>
-    <artifactId>javaee-web-api</artifactId>
-      <version>7.0</version>
-      <scope>provided</scope>
- </dependency>
-<dependency>
-  <groupId>com.google.code.gson</groupId>
-   <artifactId>gson</artifactId>
-   <version>2.9.0</version>
-  </dependency>
- <dependency>
-   <groupId>javax.servlet</groupId>
-    <artifactId>jstl</artifactId>
-    <version>1.2</version>
- </dependency>
-</dependencies>
+let totalCash = 0 // variable for total cash in hand
+let cidLenght = Object.keys(cashUnit).length //preset for cash-compairing
+let diff = ((cash - price) * 100) / 100 // make sure difference of between cash and price is a whole number
+let returnAmount = diff
+
+// add-up all cash in hand
+for (let element of cid) {
+  totalCash += element[1]
+}
+// make sure totalCash is a whole number
+totalCash = (totalCash * 100) / 100
+```
+
+<br/>
+<p>Code the 2 conditions which can elimilate the OPEN status:
+
+1. If difference equal cash in hand, status is <b>"CLOSED"</b>.
+2. If cash in hand less than difference to return, status is <b>"INSUFFICIENT_FUNDS"</b>.
+</p>
+   <br/>
+
+```javascript
+//if difference === cash in hand, status = "CLOSED"
+if (diff === totalCash) {
+  result.status = 'CLOSED'
+  for (let i = 0; i < cidLenght; i++) {
+    change.push(cid[i])
+  }
+  result.change = change
+}
+//if cash in hand < difference to return, status = "INSUFFICIENT_FUNDS"
+else if (totalCash - diff < 0) {
+  result.status = 'INSUFFICIENT_FUNDS'
+}
+```
+
+<br/>
+<p>Use a for-loop for tracking all cash unit, keep the cash in decending order</p>
+<br/>
+
+```javascript
+// OPEN status
+else {
+  //cash forLoop in decending order
+    for (let i = cidLenght - 1; i >= 0; i--) {
+      let temp = 0 // tracking variable for require return amount on our side
+      let tempName = cashUnit[i] // set cashUnit
+```
+
+<br/>
+<p>Use a while loop to track how we can return the change in 1 cash unit with 3 conditions:
+
+1. The Change must be larger than the cash unit amount.
+2. Temp (Require return amount) is still less than the amount in hand.
+3. ReturnAmount larger than 0, it is not balance out yet.
+</p>
+
+```javascript
+while (returnAmount >= cashUnit[i][1] && temp < cid[i][1] && returnAmount > 0) {
+  temp += cashUnit[i][1]
+  returnAmount -= cashUnit[i][1]
+  returnAmount = Math.round(returnAmount * 100) / 100
+}
+```
+
+<p>Here, we check if we have enough cash in hand for the change with each cash unit.
+If yes, status = "OPEN"
+</p>
+
+```javascript
+if (temp > 0 && cid[i][1] - returnAmount >= 0) {
+  tempName[1] = temp
+  change.push([tempName[0], tempName[1]])
+  status = 'OPEN'
+}
+```
+
+If there is a no, status = "INSUFFICIENT_FUNDS"
+
+```javascript
+ else if (temp > 0 && cid[i][1] - returnAmount < 0) {
+        status = "INSUFFICIENT_FUNDS"
+      }
+    }
+    //make sure to update the result array
+    result.status = status
+    result.change = change
+
+	//go to the next cash unit within the outer for-loop
+  }
 
 ```
 
-
-
-### Installation
-
-1. Simply download the web application on Github > Code > Dowload ZIP.
-2. Import the project to your perfered IDE.
-3. If you are using VScode or IntelliJ IDEA as your IDE, you need to setup a tomcat server for running this application on the local host.
-
-
-
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-
-
-
-
-
-
-
-
-
