@@ -20,6 +20,7 @@
   <p align="center">
     <br />
     <a href="https://playcode.io/1002604"><strong>Live Demo @ playcode »</strong></a><br/>
+    <a href="https://github.com/aplokwn/cashRegister/blob/main/cashRegister_final.js"><strong>Explore the final code »</strong></a>
     <br />
     <br />
     <br />
@@ -68,16 +69,16 @@ This is a freecodecamp Javascript project just for practise.
 
 ### Challenge Point
 
-<p>
 1. Decimal to whole number. It is easy to make mistake if we don't beware of the calulation result in js.
 2. Making the correct codition to filter the cash in hand and changes comperison, then push the correct result to the change result list.
-</p>
+
+<br/>
 
 ### Code Explaintion
 
 <br/>
 <p>
-Setup variables and constances that we will use afterwards.
+First, setup variables and constances that we will use afterwards.
 </p>
 
 ```javascript
@@ -189,5 +190,14 @@ If there is a no, status = "INSUFFICIENT_FUNDS"
   }
 
 ```
+
+<p align="center">
+    <br />
+    <a href="https://github.com/aplokwn/cashRegister/blob/main/cashRegister_final.js"><strong>Explore the code with the commented version »</strong></a>
+    <br />
+      <a href="https://github.com/aplokwn/cashRegister/blob/main/cashRegister_via_consoleLog.js"><strong>Explore the code with the consoleLog version »</strong></a>
+    <br />
+    <br />
+  </p>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
