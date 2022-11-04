@@ -19,20 +19,20 @@ function checkCashRegister (price, cash, cid) {
   let diff = (cash - price) * 100 / 100
   let returnAmount = diff
 
-  //console.log("Difference: "+ diff);
+  console.log("Difference: " + diff)
 
-  //console.log(cid[0][1]);
+  console.log(cid[0][1])
 
   for (let element of cid) {
     totalCash += element[1]
-    //console.log(totalCash);
+    console.log(totalCash)
   }
   totalCash = totalCash * 100 / 100
-  //console.log("Total cash: " + totalCash);
+  console.log("Total cash: " + totalCash)
 
 
   if (diff === totalCash) {
-    //console.log("equal");
+    console.log("equal")
     result.status = "CLOSED"
     for (let i = 0; i < cidLenght; i++) {
       change.push(cid[i])
@@ -46,8 +46,7 @@ function checkCashRegister (price, cash, cid) {
 
   else {
 
-    //if(totalCash > diff){
-    //console.log("arrive!");
+    console.log("arrive!")
     for (let i = cidLenght - 1; i >= 0; i--) {
       let temp = 0
       let tempName = cashUnit[i]
@@ -57,22 +56,22 @@ function checkCashRegister (price, cash, cid) {
         temp += cashUnit[i][1]
         returnAmount -= cashUnit[i][1]
         returnAmount = Math.round(returnAmount * 100) / 100
-        //console.log("Temp: "+ temp)
-        //console.log("Temp: "+ returnAmount);
+        console.log("Temp: " + temp)
+        console.log("Temp: " + returnAmount)
       }
       if (temp > 0 && cid[i][1] - returnAmount >= 0) {
         tempName[1] = temp
-        //console.log(tempName[0]);
-        //console.log(tempName);
-        //console.log(change)
-        //var arraynew = [tempName[0], tempName[1]];
+        console.log(tempName[0])
+        console.log(tempName)
+        console.log(change)
+        var arraynew = [tempName[0], tempName[1]]
         change.push([tempName[0], tempName[1]])
-        //console.log(change);
+        console.log(change)
         status = "OPEN"
 
       }
       else if (temp > 0 && cid[i][1] - returnAmount < 0) {
-        //console.log("got you!");
+        console.log("got you!")
         status = "INSUFFICIENT_FUNDS"
       }
 
@@ -80,7 +79,7 @@ function checkCashRegister (price, cash, cid) {
 
     }
 
-    //console.log(change);
+    console.log(change)
     result.status = status
     result.change = change
 

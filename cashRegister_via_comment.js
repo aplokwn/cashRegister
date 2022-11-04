@@ -14,7 +14,7 @@ function checkCashRegister (price, cash, cid) {
     ["TWENTY", 20],
     ["ONE HUNDRED", 100]]
 
-  let totalCash = 0 //
+  let totalCash = 0 // variable for total cash in hand
   let cidLenght = Object.keys(cashUnit).length //preset for cash-compairing
   let diff = (cash - price) * 100 / 100 // make sure difference of between cash and price is a whole number
   let returnAmount = diff
